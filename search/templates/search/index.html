@@ -1,1 +1,26 @@
-<h2>Test</h2>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기업 이미지 검색</title>
+    {% load static %}
+    <link href="{% static 'search/css/index.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div class="logo">BUSINESS INSIGHTS</div>
+        <div class="search-container">
+            <form action="#" method="get">
+                <div class="form__group field">
+                    <input required="" placeholder="Name" class="form__field" type="input" id="name">
+                    <label class="form__label" for="name">기업명을 검색하세요.</label>
+                </div>
+            </form>
+        </div>
+    </header>
+    <main>
+        <!-- 메인 콘텐츠가 필요하다면 여기에 추가 -->
+    </main>
+</body>
+</html>

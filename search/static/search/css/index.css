@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RixInooAriDuriR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+}
+
+.logo {
+    font-family: 'GongGothicMedium';
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-right: 20px; /* 로고와 검색창 사이의 간격 */
+}
+
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 800px; /* 검색창의 최대 너비를 늘림 */
+}
+
+.form__group {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* 검색 입력 필드의 최대 너비를 늘림 */
+}
+
+.form__field {
+    width: 100%;
+    font-family: inherit;
+    border: none;
+    border-bottom: 2px solid #6b6b6b;
+    outline: 0;
+    font-size: 17px;
+    color: #161616;
+    padding: 9px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+    color: transparent;
+}
+
+.form__label {
+    position: absolute;
+    top: 0; /* 레이블을 위로 올림 */
+    display: block;
+    transition: 0.2s;
+    font-size: 14px; /* 레이블 크기를 조금 줄임 */
+    color: #6b6b6b; /* 레이블 색상을 조금 연하게 */
+    pointer-events: none;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px; /* placeholder가 보일 때 레이블 위치 조정 */
+}
+
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #161616, #161616);
+    border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #161616;
+    font-weight: 700;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+    box-shadow: none;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
