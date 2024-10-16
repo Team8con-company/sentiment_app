@@ -6,6 +6,8 @@
     <title>기업 이미지 검색</title>
     {% load static %}
     <link href="{% static 'search/css/index.css' %}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
 </head>
 <body>
     <header>
@@ -70,24 +72,39 @@
                     <p>{{ results.company_name }}에 대한 분석 결과가 없습니다.</p>
                 {% else %}
                     <h2>{{ results.company_name }} 검색 결과</h2>
-                    <div class="results">
-                        <div class="result-item">
-                            <h3>긍정</h3>
-                            <p>{{ results.positive_percent }}%</p>
+                    <div class="results-wrapper">
+                        <div class="results-left">
+                            <div class="results">
+                                <div class="result-item positive"> <!-- 긍정 항목 -->
+                                    <span class="material-icons">thumb_up</span>
+                                    <p>{{ results.positive_percent }}%</p>
+                                </div>
+                                <div class="result-item negative"> <!-- 부정 항목 -->
+                                    <span class="material-icons">thumb_down_alt</span>
+                                    <p>{{ results.negative_percent }}%</p>
+                                </div>
+                            </div>
+                            {% if results.wordcloud %}
+                                <div class="wordcloud-container">
+                                    <h3>뉴스 키워드 워드클라우드</h3>
+                                    <img src="data:image/png;base64,{{ results.wordcloud }}" alt="Word Cloud">
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="result-item">
-                            <h3>부정</h3>
-                            <p>{{ results.negative_percent }}%</p>
-                        </div>
-                        <div class="result-item">
-                            <h3>중립</h3>
-                            <p>{{ results.neutral_percent }}%</p>
+                        <div class="results-right">
+                            {% if results.recent_news %}
+                                <h3>최근 관련 기사</h3>
+                                <ul class="recent-news-list">
+                                    {% for news in results.recent_news %}
+                                        <li>
+                                            <a href="{{ news.link }}" target="_blank">{{ news.title }}</a>
+                                            <span class="news-date">{{ news.date|date:"Y-m-d" }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                     </div>
-                    {% if results.wordcloud %}
-                        <h3>뉴스 키워드 워드클라우드</h3>
-                        <img src="data:image/png;base64,{{ results.wordcloud }}" alt="Word Cloud">
-                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>

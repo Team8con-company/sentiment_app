@@ -58,8 +58,12 @@ def search_results(request):
                     wordcloud_image = generate_wordcloud(news_text)
                     cache.set(cache_key, wordcloud_image, 3600)  # 1시간 동안 캐시
                 results['wordcloud'] = wordcloud_image
-            else:
-                results = {'company_name': comp.name, 'no_results': True}
+                
+            # 최근 기사 10개 가져오기
+            recent_news = news_data.order_by('-date')[:10]
+
+            results['recent_news'] = recent_news
+
         except CompanyList.DoesNotExist:
             results = {'company_name': company, 'not_found': True}
 
@@ -75,6 +79,7 @@ def search_results(request):
 from django.contrib.staticfiles import finders
 font_path = finders.find('fonts/SB M.ttf')
 
+
 def generate_wordcloud(text):
     hannanum = Hannanum()
     nouns = hannanum.nouns(text)
@@ -88,7 +93,8 @@ def generate_wordcloud(text):
 
     wordcloud = WordCloud(
         font_path=font_path,
-        background_color='white',
+        mode="RGBA",
+        background_color=None,
         height=400,
         width=800,
         max_words=100,  # 최대 단어 수 제한
