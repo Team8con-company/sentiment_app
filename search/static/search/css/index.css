@@ -5,8 +5,22 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FlightSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/FlightSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'SUIT-Regular';
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -16,24 +30,22 @@ body {
 }
 
 header {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 15px 5%;
-    max-width: auto;
-    margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
 }
 
 .logo {
-    font-family: 'GongGothicMedium';
     font-size: 1.5em;
     font-weight: bold;
     letter-spacing: 0.1em;
     white-space: nowrap;
+    font-family: 'SBAggroB';
 }
 
 .search-container {
@@ -45,12 +57,12 @@ header {
     margin-left: 20px;
 }
 
-label {
-    font-family: 'GongGothicMedium';
-    font-weight: 100;
-    margin: 5px;
-    padding-right: 10px;
-    align-self: center;
+.form__label {
+    font-family: 'SUIT-Regular';
+    margin-right: 20px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 0 !important;
 }
 
 .group {
@@ -76,11 +88,7 @@ label {
     transition: .3s ease;
 }
 
-.input::placeholder {
-    color: #9e9ea7;
-}
-
-.input:focus, input:hover {
+.input:focus, .input:hover {
     outline: none;
     border-color: rgba(234,76,137,0.4);
     background-color: #fff;
@@ -94,44 +102,138 @@ label {
     width: 1rem;
     height: 1rem;
 }
+
 main {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .company-list {
-    width: 30%;
-    background-color: #f8f8f8;
-    padding: 20px;
+    background-color: #f8f9fa;
     border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 300px; /* 최대 너비 300px로 설정 */
+    flex-grow: 1;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    max-height: auto;
+    overflow: hidden;
+}
+
+.company-list h2 {
+    font-family: 'FlightSans-Bold';
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #000b15;
+    padding-bottom: 10px;
 }
 
 .company-list ul {
     list-style-type: none;
     padding: 0;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
 }
 
 .company-list li {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px; /* 리스트 항목에 적절한 패딩 추가 */
+    border-bottom: 1px solid #e0e0e0; /* 항목 구분을 위한 경계선 추가 */
+    background-color: #fff;
+}
+
+.company-list li:last-child {
+    border-bottom: none; /* 마지막 항목의 하단 경계선 제거 */
+}
+
+.company-list .rank {
+    min-width: 30px;
+    margin-right: 15px; /* 순위와 회사명 사이 간격 증가 */
+    font-weight: bold;
+    color: #495057;
 }
 
 .company-list a {
+    color: #000b15;
     text-decoration: none;
-    color: #333;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    flex-grow: 1;
 }
 
 .company-list a:hover {
-    color: #0066cc;
+    color: #EA4C89;
+}
+
+.pagination-vertical {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    list-style: none;
+}
+
+
+.pagination-vertical .page-link {
+    display: inline;
+    justify-items: center;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #EA4C89;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    font-size: 14px;
+}
+
+.pagination-vertical .page-item:first-child .page-link {
+    margin-top: 0;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.pagination-vertical .page-item:last-child .page-link {
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.pagination-vertical .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #EA4C89;
+    border-color: #EA4C89;
+    background-color: #fff;
+}
+
+.pagination-vertical .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+    background-color: #fff;
 }
 
 .results-container {
-    width: 65%;
+    flex-grow: 2;
+    min-width: 300px;
 }
 
 .results {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .result-item {
@@ -140,8 +242,9 @@ main {
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 30%;
+    width: calc(33.33% - 20px);
     margin: 10px;
+    min-width: 200px;
 }
 
 .result-item h3 {
@@ -155,13 +258,3 @@ main {
     color: #0d0c22;
 }
 
-@media (max-width: 768px) {
-    main {
-        flex-direction: column;
-    }
-
-    .company-list, .results-container {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-}
