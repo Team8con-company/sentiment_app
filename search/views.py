@@ -50,6 +50,10 @@ def search_results(request):
 
     return render(request, 'search/index.html', {'results': results, 'companies': companies})
 
+
+from django.contrib.staticfiles import finders
+font_path = finders.find('fonts/SB M.ttf')
+
 def generate_wordcloud(text):
     hannanum = Hannanum()
     nouns = hannanum.nouns(text)
@@ -62,7 +66,7 @@ def generate_wordcloud(text):
     counter = Counter(words)
 
     wordcloud = WordCloud(
-        font_path='/Users/yoonjeong/Library/Fonts/Freesentation-4Regular.ttf',
+        font_path=font_path,
         background_color='white',
         height=400,
         width=800,
