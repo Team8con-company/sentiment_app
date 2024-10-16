@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.cache import cache
-from .models import *
+from .models import CompanyList, NewsData
 from wordcloud import WordCloud
 from collections import Counter
 from konlpy.tag import Hannanum
@@ -8,45 +8,44 @@ import base64
 from io import BytesIO
 
 def index(request):
-    companies = CorData.objects.all().order_by('cor_name')
+    companies = CompanyList.objects.all().order_by('name')
     return render(request, 'search/index.html', {'companies': companies})
 
 def search_results(request):
     company = request.GET.get('company', '')
     results = {}
-    companies = CorData.objects.all().order_by('cor_name')
+    companies = CompanyList.objects.all().order_by('name')
     
     if company:
         try:
-            cor = CorData.objects.get(cor_name__iexact=company)
-            sentiments = SentimentData.objects.filter(cor=cor)
+            comp = CompanyList.objects.get(name__iexact=company)
+            news_data = NewsData.objects.filter(comp=comp)
             
-            total = sentiments.count()
+            total = news_data.count()
             
             if total > 0:
-                positive = sentiments.filter(result='positive').count()
-                negative = sentiments.filter(result='negative').count()
-                neutral = sentiments.filter(result='neutral').count()
+                positive = news_data.filter(sentiment='positive').count()
+                negative = news_data.filter(sentiment='negative').count()
+                neutral = news_data.filter(sentiment='neutral').count()
 
                 results = {
-                    'company_name': cor.cor_name,
+                    'company_name': comp.name,
                     'positive_percent': round((positive / total) * 100, 2),
                     'negative_percent': round((negative / total) * 100, 2),
                     'neutral_percent': round((neutral / total) * 100, 2),
                 }
                 
                 # 워드클라우드 생성 (캐시 적용)
-                cache_key = f'wordcloud_{cor.cor_id}'
+                cache_key = f'wordcloud_{comp.id}'
                 wordcloud_image = cache.get(cache_key)
                 if not wordcloud_image:
-                    news_data = NewsData.objects.filter(cor=cor)
-                    news_text = ' '.join([news.news_title for news in news_data])
+                    news_text = ' '.join([news.title for news in news_data])
                     wordcloud_image = generate_wordcloud(news_text)
                     cache.set(cache_key, wordcloud_image, 3600)  # 1시간 동안 캐시
                 results['wordcloud'] = wordcloud_image
             else:
-                results = {'company_name': cor.cor_name, 'no_results': True}
-        except CorData.DoesNotExist:
+                results = {'company_name': comp.name, 'no_results': True}
+        except CompanyList.DoesNotExist:
             results = {'company_name': company, 'not_found': True}
 
     return render(request, 'search/index.html', {'results': results, 'companies': companies})

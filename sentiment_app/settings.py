@@ -74,27 +74,32 @@ WSGI_APPLICATION = "sentiment_app.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+'''
+# SQLite3 설정
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 '''
-MySQL DB 설정
+
+# MySQL DB 설정
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'your_database_name',
-        'USER': 'your_mysql_username',
-        'PASSWORD': 'your_mysql_password',
-        'HOST': 'localhost',
+        'NAME': 'sentimentdb',
+        'USER': 'root',
+        'PASSWORD': '12345678',
+        'HOST': '34.67.218.11',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+            'use_unicode': True,
+        },
     }
 }
-'''
 
 
 # Password validation
