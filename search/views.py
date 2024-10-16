@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.core.cache import cache
 from .models import CompanyList, NewsData
 from wordcloud import WordCloud
@@ -8,13 +9,27 @@ import base64
 from io import BytesIO
 
 def index(request):
-    companies = CompanyList.objects.all().order_by('name')
-    return render(request, 'search/index.html', {'companies': companies})
+    companies = CompanyList.objects.all().order_by('id')
+    paginator = Paginator(companies, 10)  # 페이지당 10개 항목
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'companies': companies,
+    }
+    
+    return render(request, 'search/index.html', context)
 
 def search_results(request):
     company = request.GET.get('company', '')
     results = {}
-    companies = CompanyList.objects.all().order_by('name')
+    companies = CompanyList.objects.all().order_by('id')
+    
+    # 페이지네이션 추가
+    paginator = Paginator(companies, 10)  # 페이지당 10개 항목
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     
     if company:
         try:
@@ -48,7 +63,13 @@ def search_results(request):
         except CompanyList.DoesNotExist:
             results = {'company_name': company, 'not_found': True}
 
-    return render(request, 'search/index.html', {'results': results, 'companies': companies})
+    context = {
+        'results': results,
+        'page_obj': page_obj,
+        'companies': companies,
+    }
+
+    return render(request, 'search/index.html', context)
 
 
 from django.contrib.staticfiles import finders
