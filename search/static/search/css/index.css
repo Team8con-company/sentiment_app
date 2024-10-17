@@ -1,0 +1,374 @@
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FlightSans-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/FlightSans-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: 'SUIT-Regular';
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 5%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    font-family: 'SBAggroB';
+}
+
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 800px;
+    margin-left: 20px;
+}
+
+.form__label {
+    font-family: 'SUIT-Regular';
+    margin-right: 20px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 0 !important;
+}
+
+.group {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.input {
+    width: 100%;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+}
+
+.input:focus, .input:hover {
+    outline: none;
+    border-color: rgba(234,76,137,0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+}
+
+main {
+    display: flex;
+    justify-content:flex-start;
+    padding: 20px;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.company-list {
+    background-color: #F5F5F7;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    width: 300px;
+    flex-shrink: 0;
+    max-width: 300px; /* 최대 너비 300px로 설정 */
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    max-height: auto;
+    overflow: hidden;
+}
+
+.company-list h2 {
+    font-family: 'SUIT-Regular';
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.company-list ul {
+    list-style-type: none;
+    padding: 0;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.company-list li {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px; /* 리스트 항목에 적절한 패딩 추가 */
+    border-bottom: 1px solid #e0e0e0; /* 항목 구분을 위한 경계선 추가 */
+    background-color: #fff;
+}
+
+.company-list li:last-child {
+    border-bottom: none; /* 마지막 항목의 하단 경계선 제거 */
+}
+
+.company-list .rank {
+    min-width: 30px;
+    margin-right: 15px; /* 순위와 회사명 사이 간격 증가 */
+    font-weight: bold;
+    color: #495057;
+}
+
+.company-list a {
+    color: #000b15;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    flex-grow: 1;
+}
+
+.company-list a:hover {
+    color: #EA4C89;
+}
+
+.pagination-vertical {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+    list-style: none;
+    background-color: #fff;
+}
+
+.pagination-vertical .page-link {
+    display: inline-flex;
+    justify-items: center;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #EA4C89;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    font-size: 14px;
+}
+
+.pagination-vertical .page-item:first-child .page-link {
+    margin-top: 0;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.pagination-vertical .page-item:last-child .page-link {
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.pagination-vertical .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #EA4C89;
+    border-color: #EA4C89;
+    background-color: #fff;
+}
+
+.pagination-vertical .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+    background-color: #fff;
+}
+
+h2 {
+    font-family: 'FlightSans-Bold';
+    padding-left: 10px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+h3 {
+    font-family: 'FlightSans-Bold';
+    padding-left: 10px;
+    color: #333;
+}
+
+.results-container {
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+    margin-left: 20px; /* 왼쪽 목록과의 간격 */
+}
+
+.results-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.results-left {
+    width: 60%;
+    padding-right: 20px;
+}
+
+.results-right {
+    width: 40%;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 20px;
+}
+
+.results {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    flex: 1; /* 남은 공간을 균등하게 분배 */
+    max-width: calc(50% - 10px); /* 두 아이템이 나란히 있을 때의 최대 너비 */
+}
+
+.result-item:first-child {
+    margin-right: 20px;
+}
+
+.result-item .material-icons {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+/* 긍정 항목 스타일 */
+.result-item.positive {
+    color: rgb(65, 170, 206);
+    font-family: 'FlightSans-Bold';
+    
+}
+
+/* 부정 항목 스타일 */
+.result-item.negative {
+    color: rgb(227, 89, 109);
+    font-family: 'FlightSans-Bold';
+}
+
+.result-item p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.wordcloud-container {
+    display: block;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 (필요한 경우) */
+    margin: 20px 0; /* 위아래 여백 */
+}
+
+.wordcloud-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.recent-news-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-news-list li {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+.recent-news-list a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.recent-news-list a:hover {
+    color: #007bff;
+}
+
+.news-date {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
